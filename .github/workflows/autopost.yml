@@ -25,6 +25,7 @@ jobs:
           STATE_KEY: ${{ secrets.STATE_KEY }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           VK_USER_TOKEN: ${{ secrets.VK_USER_TOKEN }}
+          VK_STORIES_TOKEN: ${{ secrets.VK_STORIES_TOKEN }}
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
           TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}

@@ -4,6 +4,8 @@ import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { req } from '../lib/http.mjs';
+import { vk as vkApi, storyUploadServer } from '../lib/net/vk.mjs';
+import { withUtm } from '../lib/captions.mjs';
 
 const DIR = join(dirname(fileURLToPath(import.meta.url)), '..');
 const cfg = JSON.parse(readFileSync(join(DIR, 'config.json'), 'utf8'));
@@ -29,7 +31,18 @@ async function telegram() {
   ok('telegram', `бот @${me.result.username} может публиковать в «${chat.result.title}» (${ch})`);
 }
 
-for (const [net, fn] of Object.entries({ telegram })) {
+// VK stories: asks VK for an upload address with our link — VK checks the key, the right and the link; nothing is posted.
+async function vk() {
+  const c = cfg.networks.vk, t = env.VK_STORIES_TOKEN;
+  if (c.mode !== 'stories') return skip('vk', `режим ${c.mode} не проверяется`);
+  if (!t) return (c.enabled ? fail : skip)('vk', 'нет ключа VK_STORIES_TOKEN');
+  const g = (await vkApi('groups.getById', { group_id: c.groupId }, t)).groups?.[0];
+  const s = await storyUploadServer(t, c, withUtm(cfg.catalogUrl, 'vk', 'check'));
+  if (!s.upload_url) return fail('vk', 'ВК не дал адрес для загрузки истории');
+  ok('vk', `можно выкладывать истории в «${g?.name || c.groupId}» со ссылкой на сайт`);
+}
+
+for (const [net, fn] of Object.entries({ telegram, vk })) {
   try { await fn(); } catch (e) { fail(net, e.message); }
 }
 process.exit(bad ? 1 : 0);

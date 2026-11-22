@@ -85,7 +85,7 @@ for (const net of nets) {
     if (needsFile && !existsSync(file)) throw new Error(`нет файла ${clip.file}`);
     let r;
     if (net === 'telegram') r = await postTelegram({ token: env.TG_BOT_TOKEN, cfg: ncfg, file, cap });
-    else if (net === 'vk') r = await postVk({ token: env.VK_USER_TOKEN, cfg: ncfg, file, cap });
+    else if (net === 'vk') r = await postVk({ token: ncfg.mode === 'stories' ? env.VK_STORIES_TOKEN : env.VK_USER_TOKEN, cfg: ncfg, file, cap });
     else if (net === 'instagram') {
       if (!tokens.instagram) throw new Error('instagram: нет токена');
       if (older(tokens.instagram.refreshed_at, 7)) { tokens.instagram = await refreshInstagram(tokens.instagram); tokensChanged = true; }

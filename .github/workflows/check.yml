@@ -9,7 +9,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
+      - name: Tests
+        run: node --test tests/
+      - name: Syntax
+        run: for f in post.mjs vk-bot.mjs tools/*.mjs lib/*.mjs lib/net/*.mjs; do node --check "$f"; done
       - name: Check connections
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          VK_STORIES_TOKEN: ${{ secrets.VK_STORIES_TOKEN }}
         run: node tools/check.mjs
