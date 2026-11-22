@@ -7,7 +7,7 @@
   "graphVersion": "v23.0",
   "networks": {
     "telegram": { "enabled": true, "channel": "@letyouwow_wedding", "button": "Посмотреть приглашение" },
-    "vk": { "enabled": false, "groupId": 0, "mode": "video" },
+    "vk": { "enabled": false, "groupId": 243583950, "mode": "video" },
     "instagram": { "enabled": false, "userId": "", "maxPerDay": 25 },
     "threads": { "enabled": false, "maxPerDay": 25 },
     "tiktok": { "enabled": false, "privacy": "SELF_ONLY", "maxPerDay": 15 }
