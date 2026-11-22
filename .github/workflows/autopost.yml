@@ -1,0 +1,57 @@
+name: autopost
+on:
+  schedule:
+    - cron: '17 5-20 * * *'   # every hour 8:17–23:17 Moscow (UTC+3); post.mjs checks the ramp and fills a missed slot
+  workflow_dispatch:              # manual test from the GitHub page: Actions → autopost → Run workflow
+    inputs:
+      only: { description: 'одна сеть (telegram, vk, instagram, threads, tiktok) или пусто', required: false, default: '' }
+      clip: { description: 'id ролика или пусто', required: false, default: '' }
+      dry: { description: 'только показать, не публиковать', type: boolean, default: true }
+concurrency: { group: autopost, cancel-in-progress: false }
+permissions: { contents: write }
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Latest state
+        run: git pull -q --rebase origin main
+      - name: Post
+        env:
+          STATE_KEY: ${{ secrets.STATE_KEY }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          VK_USER_TOKEN: ${{ secrets.VK_USER_TOKEN }}
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          IN_ONLY: ${{ inputs.only }}
+          IN_CLIP: ${{ inputs.clip }}
+          IN_DRY: ${{ inputs.dry }}
+        run: |
+          set -- 
+          if [ "${{ github.event_name }}" = workflow_dispatch ]; then
+            set -- --force
+            [ "$IN_DRY" = true ] && set -- "$@" --dry
+            [ -n "$IN_ONLY" ] && set -- "$@" "--only=$IN_ONLY"
+            [ -n "$IN_CLIP" ] && set -- "$@" "--clip=$IN_CLIP"
+          fi
+          node post.mjs "$@"
+      - name: Save state
+        if: always()
+        run: |
+          git config user.name autopost
+          git config user.email autopost@users.noreply.github.com
+          for f in state.json tokens.enc; do [ -f "$f" ] && git add "$f"; done
+          git diff --cached --quiet && exit 0
+          git commit -qm "state $(date -u +%FT%H:%M)"
+          for i in 1 2 3; do
+            if git pull -q --rebase origin main; then git push -q && exit 0; else git rebase --abort || true; fi
+            sleep 5
+          done
+          exit 1

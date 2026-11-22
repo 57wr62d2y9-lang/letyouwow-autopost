@@ -1,0 +1,13 @@
+{
+  "name": "letyouwow-autopost",
+  "private": true,
+  "type": "module",
+  "description": "Hourly wedding Reels autoposting to Telegram, VK, Instagram, Threads, TikTok + VK keyword bot",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "post": "node post.mjs",
+    "dry": "node post.mjs --dry --force",
+    "test": "node --test tests/*.test.mjs",
+    "vk-bot": "node vk-bot.mjs"
+  }
+}
