@@ -55,13 +55,28 @@ async function linkFor(postId) {
   } catch {}
   return { url: withUtm(cfg.catalogUrl, 'vk', 'bot'), name: null };
 }
-const text = l => (l.name ? `Вот приглашение «${l.name}» из ролика 💌\n${l.url}` : `Вот все наши свадебные приглашения 💌\n${l.url}`)
-  + `\n\nОткройте ссылку с телефона: можно посмотреть демо и сразу собрать свое.`;
+// Texts: social-kit/avtoposting/otvety.md (same as Manychat in Instagram).
+const text = l => (l.name
+  ? `Привет! Это приглашение «${l.name}» из ролика 💌\nОткройте с телефона — увидите его глазами гостей, с музыкой и анимацией:\n${l.url}`
+  : `Привет! Вот все наши свадебные приглашения 💌\n${l.url}`)
+  + `\n\nПонравится — соберете свое прямо там: имена, дата, место и ваша история. Это около 10 минут, а гостям отправляете одну ссылку.`;
+const COMMENT_REPLIES = ['Отправили в сообщения 💌', 'Уже у вас в личке ✨', 'Ссылка ждет в сообщениях 🤍', 'Готово, проверьте личку 🥂'];
+const FAQ = [
+  [/цен|сколько|стоим|стоит/i, 'Приглашение со всеми страницами — 1 900 ₽, оплата один раз. Ссылка работает до свадьбы и еще 3 месяца после.'],
+  [/отправ|гост/i, 'Вы получаете одну ссылку и отправляете ее гостям в WhatsApp или Telegram. Каждый гость открывает с телефона и сразу отвечает, придет ли.'],
+  [/музык|песн|мелод/i, 'В каждом дизайне есть мелодия, а можно поставить свою песню.'],
+  [/придет|ответ|список/i, 'Ответы гостей приходят вам: кто придет и сколько человек.'],
+  [/срок|когда|быстр/i, 'Собрать можно за вечер, ссылка появляется сразу после оплаты.'],
+];
 
 const replied = new Set();   // one answer per person per post, until restart
 async function onMessage(m) {
-  if (!m || m.from_id < 0 || !KEYWORD.test(m.text || '')) return;
-  await vk('messages.send', { peer_id: m.peer_id, random_id: Date.now() % 2147483647, message: text(await linkFor()) });
+  if (!m || m.from_id < 0 || !m.text) return;
+  let message = null;
+  if (KEYWORD.test(m.text)) message = text(await linkFor());
+  else message = FAQ.find(([re]) => re.test(m.text))?.[1] || null;   // anything else: left for a person to answer
+  if (!message) return;
+  await vk('messages.send', { peer_id: m.peer_id, random_id: Date.now() % 2147483647, message });
   console.log(`ответ в личку ${m.peer_id}`);
 }
 async function onComment(c) {
@@ -72,7 +87,7 @@ async function onComment(c) {
   const l = await linkFor(c.post_id);
   try {
     await vk('messages.send', { user_id: c.from_id, random_id: Date.now() % 2147483647, message: text(l) });
-    await vk('wall.createComment', { owner_id: -GROUP, post_id: c.post_id, reply_to_comment: c.id, from_group: GROUP, message: 'Отправили ссылку в сообщения 💌' });
+    await vk('wall.createComment', { owner_id: -GROUP, post_id: c.post_id, reply_to_comment: c.id, from_group: GROUP, message: COMMENT_REPLIES[replied.size % COMMENT_REPLIES.length] });
   } catch (e) {
     // 901/902: the person has not allowed messages from the community — answer right in the comments.
     await vk('wall.createComment', { owner_id: -GROUP, post_id: c.post_id, reply_to_comment: c.id, from_group: GROUP, message: `Вот ссылка 💌 ${l.url}` });
