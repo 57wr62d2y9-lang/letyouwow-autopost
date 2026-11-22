@@ -1,0 +1,15 @@
+name: check
+on: workflow_dispatch   # Actions → check → Run workflow. Read-only: posts nothing.
+permissions: { contents: read }
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Check connections
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+        run: node tools/check.mjs
