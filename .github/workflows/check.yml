@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - name: Tests
-        run: node --test tests/
+        run: node --test tests/*.test.mjs
       - name: Syntax
         run: for f in post.mjs vk-bot.mjs tools/*.mjs lib/*.mjs lib/net/*.mjs; do node --check "$f"; done
       - name: Check connections
