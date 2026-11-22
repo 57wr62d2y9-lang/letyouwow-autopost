@@ -15,13 +15,15 @@ const skip = (net, msg) => console.log(`— ${net}: ${msg}`);
 
 async function telegram() {
   const t = env.TG_BOT_TOKEN, ch = cfg.networks.telegram.channel;
-  if (!t) return skip('telegram', 'нет ключа TG_BOT_TOKEN');
+  if (!t) return (cfg.networks.telegram.enabled ? fail : skip)('telegram', 'нет ключа TG_BOT_TOKEN');
   const api = m => req(`https://api.telegram.org/bot${t}/${m}`, {}, `telegram ${m.split('?')[0]}`);
   const me = await api('getMe');
   if (!me.ok) return fail('telegram', 'ключ не подходит');
-  const chat = await api(`getChat?chat_id=${encodeURIComponent(ch)}`).catch(() => ({ ok: false }));
-  if (!chat.ok) return fail('telegram', `бот @${me.result.username} не видит канал ${ch}`);
-  const m = await api(`getChatMember?chat_id=${encodeURIComponent(ch)}&user_id=${me.result.id}`).catch(() => ({ ok: false }));
+  // HTTP 400/403 = no access to the channel; network errors and 429 fall through with their real cause.
+  const noAccess = e => { if (/HTTP 40[03]/.test(e.message)) return { ok: false, why: e.message }; throw e; };
+  const chat = await api(`getChat?chat_id=${encodeURIComponent(ch)}`).catch(noAccess);
+  if (!chat.ok) return fail('telegram', `бот @${me.result.username} не видит канал ${ch} (${chat.why})`);
+  const m = await api(`getChatMember?chat_id=${encodeURIComponent(ch)}&user_id=${me.result.id}`).catch(noAccess);
   if (!m.ok || m.result.status !== 'administrator') return fail('telegram', `бот @${me.result.username} не админ в ${ch}`);
   if (!m.result.can_post_messages) return fail('telegram', `бот @${me.result.username} админ в ${ch}, но без права публиковать`);
   ok('telegram', `бот @${me.result.username} может публиковать в «${chat.result.title}» (${ch})`);
