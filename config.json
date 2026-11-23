@@ -7,7 +7,7 @@
   "graphVersion": "v23.0",
   "networks": {
     "telegram": {
-      "enabled": true,
+      "enabled": false,
       "channel": "@letyouwow_wedding",
       "button": "Посмотреть приглашение",
       "repeat": false
