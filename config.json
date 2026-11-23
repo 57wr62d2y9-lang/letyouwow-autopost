@@ -9,7 +9,8 @@
     "telegram": {
       "enabled": true,
       "channel": "@letyouwow_wedding",
-      "button": "Посмотреть приглашение"
+      "button": "Посмотреть приглашение",
+      "repeat": false
     },
     "vk": {
       "enabled": false,

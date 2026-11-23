@@ -59,6 +59,7 @@ test('nextClip: fresh first, then the oldest, never more often than repeatDays; 
   st.posts.push({ network: 'vk', clip: 'a', ok: false, at: '2026-12-01T12:00:00Z', day: '2026-12-01' });
   assert.equal(countToday(st, 'vk', '2026-12-01'), 2);
   assert.equal(nextClip([{ id: 'x', ready: false }], st, 'vk', t), null);
+  assert.equal(nextClip(clips, st, 'vk', new Date('2026-12-08T10:30:00Z'), 0), null);   // repeat: false -> never again
 });
 
 test('tokens round-trip encrypted; wrong key fails', () => {

@@ -55,7 +55,7 @@ for (const [net, name, make] of [
   ['tiktok', 'TIKTOK_REFRESH_TOKEN', v => ({ refresh_token: v })],
 ]) {
   const v = env[name];
-  if (v && tokensOk && tokens[net]?.seed !== fp(v)) { tokens[net] = { ...make(v), seed: fp(v) }; tokensChanged = true; }
+  if (v && tokensOk && nets.includes(net) && tokens[net]?.seed !== fp(v)) { tokens[net] = { ...make(v), seed: fp(v) }; tokensChanged = true; }
 }
 const older = (iso, days) => !iso || now - Date.parse(iso) > days * 86400e3;
 
@@ -73,7 +73,7 @@ for (const net of nets) {
   const done = st.posts.some(p => p.network === net && p.ok && !p.manual && p.day === day && p.hour === hour);
   if (done && !FORCE) { console.log(`${net}: слот ${hour}:00 уже выполнен`); continue; }
   if (ncfg.maxPerDay && countToday(st, net, day) >= ncfg.maxPerDay && !FORCE) { console.log(`${net}: дневной лимит ${ncfg.maxPerDay}`); continue; }
-  const clip = CLIP ? clips.find(c => c.id === CLIP) : nextClip(clips, st, net, now, cfg.repeatAfterDays ?? 7);
+  const clip = CLIP ? clips.find(c => c.id === CLIP) : nextClip(clips, st, net, now, cfg.networks[net]?.repeat === false ? 0 : (cfg.repeatAfterDays ?? 7));
   if (!clip) { console.log(`${net}: нет ролика (все готовые уже выходили за последние ${cfg.repeatAfterDays ?? 7} дней) — пропускаю`); continue; }
   let cap;
   try { cap = caption(clip, net, day); } catch (e) { console.log(`${net}: ✗ ролик ${clip.id}: плохая карточка (${e.message})`); fail++; continue; }
