@@ -1,15 +1,35 @@
 {
-  "startDate": null,
+  "startDate": "2026-11-23",
   "timezoneOffsetHours": 3,
   "catalogUrl": "https://letyouwow.ru/wedding/",
   "mediaBaseUrl": "",
   "repeatAfterDays": 7,
   "graphVersion": "v23.0",
   "networks": {
-    "telegram": { "enabled": true, "channel": "@letyouwow_wedding", "button": "Посмотреть приглашение" },
-    "vk": { "enabled": false, "groupId": 243583950, "mode": "stories", "linkText": "view" },
-    "instagram": { "enabled": false, "userId": "", "maxPerDay": 25 },
-    "threads": { "enabled": false, "maxPerDay": 25 },
-    "tiktok": { "enabled": false, "privacy": "SELF_ONLY", "maxPerDay": 15 }
+    "telegram": {
+      "enabled": true,
+      "channel": "@letyouwow_wedding",
+      "button": "Посмотреть приглашение"
+    },
+    "vk": {
+      "enabled": false,
+      "groupId": 243583950,
+      "mode": "stories",
+      "linkText": "view"
+    },
+    "instagram": {
+      "enabled": false,
+      "userId": "",
+      "maxPerDay": 25
+    },
+    "threads": {
+      "enabled": false,
+      "maxPerDay": 25
+    },
+    "tiktok": {
+      "enabled": false,
+      "privacy": "SELF_ONLY",
+      "maxPerDay": 15
+    }
   }
 }

@@ -1,9 +1,146 @@
 [
   {
-    "id": "glicinia-01",
-    "file": "glicinia-bez-ruk.mp4",
+    "id": "dizajn-01",
+    "file": "dizajn-01.mp4",
+    "name": "Сказка",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=wooow-fairytale&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/dc0/ca3/55472152.mp4",
+    "tg": "Дизайн «Сказка»: вышитый голубой конверт и волшебное дерево с дверцей.\n\nТак гость открывает приглашение на телефоне: история пары, программа дня и место.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-04",
+    "file": "dizajn-04.mp4",
     "name": "Глициния",
     "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=wooow-wisteria-balcony&lang=ru",
-    "ready": false
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/a24/946/55472182.mp4",
+    "tg": "Дизайн «Глициния»: сиреневый бант и балкон в цветах над озером.\n\nОтправьте ссылку в мессенджер: гость откроет приглашение, пролистает программу и сразу ответит.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-03",
+    "file": "dizajn-03.mp4",
+    "name": "Тоскана",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=wooow-tuscan-sunset-lights&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/b7d/1ef/55472210.mp4",
+    "tg": "Дизайн «Тоскана»: бордовый конверт с белой печатью и закат над виноградниками.\n\nПриглашение раскрывается под музыку, а в конце гость отвечает, придет или нет.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-09",
+    "file": "dizajn-09.mp4",
+    "name": "Перламутр",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=pearl-studio&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/edd/6fa/55472224.mp4",
+    "tg": "Дизайн «Перламутр»: жемчужный конверт с листьями гинкго и сургуч цвета шампанского.\n\nМузыка, программа дня и ответ гостя — в одной ссылке.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-05",
+    "file": "dizajn-05.mp4",
+    "name": "Замок",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=wooow-timeless-countryside&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/bf0/c67/55472241.mp4",
+    "tg": "Дизайн «Замок»: светлый конверт с узором и старинные стены на холме в лучах заката.\n\nМесто, время и программа — в одном приглашении, которое хочется открыть.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-07",
+    "file": "dizajn-07.mp4",
+    "name": "Зима",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=wooow-snow-fairytale&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/59a/6a1/55472251.mp4",
+    "tg": "Дизайн «Зима»: темно-синий конверт с золотой печатью и аллея свечей в зимнем лесу.\n\nБез печати и курьеров: приглашение приходит гостю ссылкой.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-06",
+    "file": "dizajn-06.mp4",
+    "name": "Бриз",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=wooow-coastal-sunset-sail&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/560/e6c/55472270.mp4",
+    "tg": "Дизайн «Бриз»: голубой конверт и закат над морским берегом.\n\nПролистайте до конца: так приглашение увидит каждый гость.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-15",
+    "file": "dizajn-15.mp4",
+    "name": "Усадьба",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=bella-vista-studio&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/09b/191/55472292.mp4",
+    "tg": "Дизайн «Усадьба»: темно-зеленый конверт с медальоном и ротонда в саду.\n\nМесто, время и программа — в одном приглашении, которое хочется открыть.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-22",
+    "file": "dizajn-22.mp4",
+    "name": "Розы",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=rosas-studio&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/b7a/557/55472308.mp4",
+    "tg": "Дизайн «Розы»: оливковый конверт с красным сургучом и пышные розы.\n\nОдна ссылка вместо бумажных приглашений. Гость нажимает — и видит каждую деталь вашего дня.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-19",
+    "file": "dizajn-19.mp4",
+    "name": "Акварель",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=bloom-studio&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/c9f/a8e/55472327.mp4",
+    "tg": "Дизайн «Акварель»: розовые цветы акварелью и море в овальной рамке.\n\nМузыка, программа дня и ответ гостя — в одной ссылке.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-16",
+    "file": "dizajn-16.mp4",
+    "name": "Бал",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=bridgerton-studio&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/ea7/906/55472353.mp4",
+    "tg": "Дизайн «Бал»: голубой конверт и сказочный замок за аллеей роз.\n\nПролистайте до конца: так приглашение увидит каждый гость.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-14",
+    "file": "dizajn-14.mp4",
+    "name": "Сумерки",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=daynight-studio&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/011/575/55472386.mp4",
+    "tg": "Дизайн «Сумерки»: зеленый конверт и дворец в огнях под звездным небом.\n\nОтправьте ссылку в мессенджер: гость откроет приглашение, пролистает программу и сразу ответит.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-18",
+    "file": "dizajn-18.mp4",
+    "name": "Элегантность",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=eleganza-studio&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/482/72d/55472401.mp4",
+    "tg": "Дизайн «Элегантность»: рамка из зелени и цветов в стиле модерн.\n\nГостю не нужно ничего скачивать: приглашение открывается по ссылке прямо в телефоне.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-21",
+    "file": "dizajn-21.mp4",
+    "name": "Премьера",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=teatro-studio&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/98b/456/55472426.mp4",
+    "tg": "Дизайн «Премьера»: красный бархатный занавес раскрывается, как в театре.\n\nТак гость открывает приглашение на телефоне: история пары, программа дня и место.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-23",
+    "file": "dizajn-23.mp4",
+    "name": "Орхидеи",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=cap-blanc-studio&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/64e/f6d/55472447.mp4",
+    "tg": "Дизайн «Орхидеи»: белый конверт с голубой печатью и арка из белых цветов.\n\nПриглашение раскрывается под музыку, а в конце гость отвечает, придет или нет.",
+    "ready": true
+  },
+  {
+    "id": "dizajn-24",
+    "file": "dizajn-24.mp4",
+    "name": "Идиллия",
+    "url": "https://letyouwow.ru/wedding/guest.html?demo=1&style=bellagio-studio&lang=ru",
+    "media": "https://ycs-media.postmypost.io/postmypost/upload/f22/6f2/55472465.mp4",
+    "tg": "Дизайн «Идиллия»: белый бант и озеро среди гор.\n\nОтправьте ссылку в мессенджер: гость откроет приглашение, пролистает программу и сразу ответит.",
+    "ready": true
   }
 ]

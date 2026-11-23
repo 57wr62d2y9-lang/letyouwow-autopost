@@ -32,7 +32,8 @@ const slot = FORCE ? { post: true, reason: 'ручной запуск', ...local
 console.log(`${now.toISOString()} — ${slot.reason}`);
 if (!slot.post) process.exit(0);
 const { day, hour } = slot;
-const mediaUrl = clip => cfg.mediaBaseUrl ? `${cfg.mediaBaseUrl.replace(/\/$/, '')}/${encodeURIComponent(clip.file)}` : '';
+// a clip may carry its own public address (clip.media, e.g. the copy already uploaded to Postmypost)
+const mediaUrl = clip => clip.media || (cfg.mediaBaseUrl ? `${cfg.mediaBaseUrl.replace(/\/$/, '')}/${encodeURIComponent(clip.file)}` : '');
 
 let nets = Object.entries(cfg.networks).filter(([n, c]) => c.enabled && (!ONLY || ONLY === n)).map(([n]) => n);
 for (const n of nets) if (!NETWORKS.includes(n)) { console.log(`неизвестная сеть в config.json: ${n}`); process.exit(1); }
@@ -81,7 +82,7 @@ for (const net of nets) {
   const rec = { network: net, clip: clip.id, at: new Date().toISOString(), day, hour, ...(FORCE ? { manual: true } : {}) };
   try {
     const needsFile = ['telegram', 'vk', 'tiktok'].includes(net);
-    if (needsFile && !existsSync(file) && cfg.mediaBaseUrl) await download(mediaUrl(clip), file);
+    if (needsFile && !existsSync(file) && mediaUrl(clip)) await download(mediaUrl(clip), file);
     if (needsFile && !existsSync(file)) throw new Error(`нет файла ${clip.file}`);
     let r;
     if (net === 'telegram') r = await postTelegram({ token: env.TG_BOT_TOKEN, cfg: ncfg, file, cap });
